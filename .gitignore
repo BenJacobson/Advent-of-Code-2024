@@ -1,0 +1,7 @@
+# Ignore Haskell build files
+*.exe
+*.hi
+*.o
+
+# Ignore puzzle inputs
+*.txt
