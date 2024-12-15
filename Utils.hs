@@ -9,6 +9,9 @@ module Utils
     turnRight,
     setAt,
     modifyAt,
+    isSpace,
+    split,
+    strip,
   )
 where
 
@@ -54,3 +57,22 @@ modifyAt :: [a] -> Int -> (a -> a) -> [a]
 modifyAt [] _ _ = []
 modifyAt (x : xs) 0 f = f x : xs
 modifyAt (x : xs) i f = x : modifyAt xs (i - 1) f
+
+isSpace :: Char -> Bool
+isSpace c
+  | c == ' ' = True
+  | c == '\n' = True
+  | otherwise = False
+
+strip :: String -> String
+strip = dropWhileEnd isSpace . dropWhile isSpace
+
+split :: (Char -> Bool) -> String -> [String]
+split p s = filter (/= "") $ map strip $ go p s
+  where
+    go _ [] = [""]
+    go d (c : s)
+      | p c = "" : h : t
+      | otherwise = (c : h) : t
+      where
+        (h : t) = go p s
