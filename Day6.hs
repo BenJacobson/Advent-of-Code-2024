@@ -1,7 +1,7 @@
-import AoC (runner)
 import Data.Set (Set, empty, insert, member)
-import Debug.Trace (traceShow)
-import Utils (Dir (..), allPos, isInGrid, modifyAt, moveDir, setAt, turnRight)
+import Utils.AoC (runner)
+import Utils.Grid2D (Dir (..), allPos, isInGrid, moveDir, turnRight)
+import Utils.List (modifyAt, setAt)
 
 data Loc = Loc
   { pos :: (Int, Int),

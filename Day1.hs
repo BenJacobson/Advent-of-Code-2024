@@ -1,5 +1,5 @@
-import AoC
-import Data.List
+import Data.List (sort, transpose)
+import Utils.AoC (runner)
 
 type Input = [[Int]]
 

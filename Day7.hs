@@ -1,6 +1,5 @@
-import AoC
-import Data.List
-import Utils (split)
+import Utils.AoC (runner)
+import Utils.String (split)
 
 type Input = [(Int, [Int])]
 

@@ -1,6 +1,5 @@
-import AoC
-import Data.List
-import Utils
+import Utils.AoC (runner)
+import Utils.Grid2D (isInGrid)
 
 type Input = [[Char]]
 
@@ -36,14 +35,14 @@ testSides :: (Char, Char) -> (Char, Char) -> Bool
 testSides (a, b) (c, d) = (a == c && b == d) || (a == d && b == c)
 
 getLeftSides :: Input -> (Int, Int) -> (Char, Char)
-getLeftSides grid (i, j) = (grid !! (i-1) !! (j-1), grid !! (i+1) !! (j+1))
+getLeftSides grid (i, j) = (grid !! (i - 1) !! (j - 1), grid !! (i + 1) !! (j + 1))
 
 getRightSides :: Input -> (Int, Int) -> (Char, Char)
-getRightSides grid (i, j) = (grid !! (i-1) !! (j+1), grid !! (i+1) !! (j-1))
+getRightSides grid (i, j) = (grid !! (i - 1) !! (j + 1), grid !! (i + 1) !! (j - 1))
 
 testX :: Input -> Char -> (Char, Char) -> (Int, Int) -> Bool
 testX grid middle sides (i, j) =
-    grid !! i !! j == middle
+  grid !! i !! j == middle
     && testSides sides (getLeftSides grid (i, j))
     && testSides sides (getRightSides grid (i, j))
 

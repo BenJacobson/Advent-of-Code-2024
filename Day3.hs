@@ -1,5 +1,5 @@
-import AoC
-import Data.Char
+import Data.Char (digitToInt, isDigit)
+import Utils.AoC (runner)
 
 type Input = String
 

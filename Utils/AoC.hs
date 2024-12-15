@@ -1,9 +1,7 @@
-module AoC
+module Utils.AoC
   ( runner,
   )
 where
-
-import Debug.Trace
 
 runner :: (Show a) => (String -> p) -> (p -> a) -> (p -> a) -> (String -> String)
 runner parser part1 part2 inputStr = do

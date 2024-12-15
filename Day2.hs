@@ -1,4 +1,4 @@
-import AoC
+import Utils.AoC (runner)
 
 type Input = [[Int]]
 
