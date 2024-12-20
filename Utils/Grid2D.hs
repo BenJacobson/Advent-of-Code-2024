@@ -6,8 +6,12 @@ module Utils.Grid2D
     allPos,
     isInGrid,
     isInRange,
+    allDir,
     moveDir,
     turnRight,
+    manhattanDistance,
+    allManhattan,
+    allManhattanFrom,
   )
 where
 
@@ -20,7 +24,10 @@ subPos :: Pos -> Pos -> Pos
 subPos (a, b) (x, y) = (a - x, b - y)
 
 data Dir = UP | DOWN | LEFT | RIGHT
-  deriving (Show, Ord, Eq)
+  deriving (Show, Ord, Eq, Enum, Bounded)
+
+allDir :: [Dir]
+allDir = [minBound .. maxBound]
 
 turnRight :: Dir -> Dir
 turnRight UP = RIGHT
@@ -44,3 +51,12 @@ isInGrid (g : gs) (i, j) = isInRange 0 (length gs) i && isInRange 0 (length g - 
 allPos :: [[a]] -> [Pos]
 allpos [] = []
 allPos (r : rs) = [(i, j) | i <- [0 .. length rs], j <- [0 .. length r - 1]]
+
+manhattanDistance :: Pos -> Pos -> Int
+manhattanDistance (i1, j1) (i2, j2) = abs (i1 - i2) + abs (j1 - j2)
+
+allManhattan :: Int -> [Pos]
+allManhattan n = [(i, j) | i <- [-n .. n], j <- [-n .. n], manhattanDistance (0, 0) (i, j) <= n]
+
+allManhattanFrom :: Pos -> Int -> [Pos]
+allManhattanFrom (di, dj) n = [(i + di, j + dj) | (i, j) <- allManhattan n]
