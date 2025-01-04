@@ -12,8 +12,12 @@ module Utils.Grid2D
     manhattanDistance,
     allManhattan,
     allManhattanFrom,
+    getCell,
+    setCell,
   )
 where
+
+import Utils.List (modifyAt, setAt)
 
 type Pos = (Int, Int)
 
@@ -47,6 +51,16 @@ isInRange l h v = l <= v && v <= h
 isInGrid :: [[a]] -> Pos -> Bool
 isInGrid [] _ = False
 isInGrid (g : gs) (i, j) = isInRange 0 (length gs) i && isInRange 0 (length g - 1) j
+
+getCell :: [[a]] -> Pos -> Maybe a
+getCell grid pos@(i, j)
+  | isInGrid grid pos = Just $ grid !! i !! j
+  | otherwise = Nothing
+
+setCell :: [[a]] -> Pos -> a -> [[a]]
+setCell grid (i, j) v
+  | isInGrid grid (i, j) = modifyAt grid i (\r -> setAt r j v)
+  | otherwise = grid
 
 allPos :: [[a]] -> [Pos]
 allpos [] = []
