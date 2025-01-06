@@ -9,14 +9,17 @@ module Utils.Grid2D
     allDir,
     moveDir,
     turnRight,
+    turnLeft,
     manhattanDistance,
     allManhattan,
     allManhattanFrom,
     getCell,
     setCell,
+    traceGrid,
   )
 where
 
+import Debug.Trace (traceShowId)
 import Utils.List (modifyAt, setAt)
 
 type Pos = (Int, Int)
@@ -32,6 +35,12 @@ data Dir = UP | DOWN | LEFT | RIGHT
 
 allDir :: [Dir]
 allDir = [minBound .. maxBound]
+
+turnLeft :: Dir -> Dir
+turnLeft UP = LEFT
+turnLeft RIGHT = UP
+turnLeft DOWN = RIGHT
+turnLeft LEFT = DOWN
 
 turnRight :: Dir -> Dir
 turnRight UP = RIGHT
@@ -74,3 +83,6 @@ allManhattan n = [(i, j) | i <- [-n .. n], j <- [-n .. n], manhattanDistance (0,
 
 allManhattanFrom :: Pos -> Int -> [Pos]
 allManhattanFrom (di, dj) n = [(i + di, j + dj) | (i, j) <- allManhattan n]
+
+traceGrid :: (Show a) => [[a]] -> [[a]]
+traceGrid = map traceShowId
