@@ -3,6 +3,7 @@ module Utils.List
     setAt,
     subarrayIndex,
     setSubarray,
+    removeOrderedDuplicates,
   )
 where
 
@@ -27,3 +28,10 @@ setSubarray [] _ _ = []
 setSubarray arr [] _ = arr
 setSubarray (a : arr) (s : sarr) 0 = s : setSubarray arr sarr 0
 setSubarray (a : arr) sarr i = a : setSubarray arr sarr (i - 1)
+
+removeOrderedDuplicates :: (Eq a) => [a] -> [a]
+removeOrderedDuplicates (x1 : x2 : xs) =
+  if x1 == x2
+    then removeOrderedDuplicates (x1 : xs)
+    else x1 : removeOrderedDuplicates (x2 : xs)
+removeOrderedDuplicates x = x
