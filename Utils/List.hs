@@ -4,6 +4,7 @@ module Utils.List
     subarrayIndex,
     setSubarray,
     removeOrderedDuplicates,
+    count,
   )
 where
 
@@ -35,3 +36,6 @@ removeOrderedDuplicates (x1 : x2 : xs) =
     then removeOrderedDuplicates (x1 : xs)
     else x1 : removeOrderedDuplicates (x2 : xs)
 removeOrderedDuplicates x = x
+
+count :: (a -> Bool) -> [a] -> Int
+count p xs = length [0 | x <- xs, p x]
